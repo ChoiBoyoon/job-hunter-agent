@@ -37,10 +37,20 @@ class JobHunterCrew:
         return Task(config=self.tasks_config["resume_rewriting_task"])
     @task
     def company_research_task(self):
-        return Task(config=self.tasks_config["company_research_task"])
+        return Task(
+            config=self.tasks_config["company_research_task"],
+            context = [
+                self.job_selection_task()
+            ])
     @task
     def interview_prep_task(self):
-        return Task(config=self.tasks_config["interview_prep_task"])
+        return Task(
+            config=self.tasks_config["interview_prep_task"],
+            context=[
+                self.job_selection_task(),  #job_selection_task의 작업 결과물을 interview_prep_task로 전달
+                self.resume_rewriting_task(),
+                self.company_research_task()]
+            )
 
     @crew
     def crew(self):
