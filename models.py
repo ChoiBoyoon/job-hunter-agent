@@ -39,3 +39,9 @@ class RankedJob(BaseModel):
 
 class RankedJobList(BaseModel):
     ranked_jobs: List[RankedJob]
+
+class ChoseJob(BaseModel):
+    job: Job
+    selected: bool
+    reason: str
+    
