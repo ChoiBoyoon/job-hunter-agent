@@ -29,7 +29,13 @@ class Job(BaseModel): #내가 알고 싶은 정보들을 넣으면 됨
     source_listing_url: str | None = None
     full_raw_job_descrition: str | None = None
 
-
-
 class JobList(BaseModel):
     jobs: List[Job]
+
+class RankedJob(BaseModel):
+    job: Job
+    match_score: int
+    reason: str
+
+class RankedJobList(BaseModel):
+    ranked_jobs: List[RankedJob]
