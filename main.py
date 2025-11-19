@@ -3,26 +3,39 @@ dotenv.load_dotenv()
 
 from crewai import Crew, Agent, Task
 from crewai.project import CrewBase, task, agent, crew
+from crewai.knowledge.source.text_file_knowledge_source import TextFileKnowledgeSource
 from models import JobList, RankedJobList, ChosenJob
+from tools import web_search_tool
+
+resume_knowledge = TextFileKnowledgeSource(
+    file_paths=["resume.txt"]
+)
 
 @CrewBase
 class JobHunterCrew:
 
     @agent
     def job_search_agent(self):
-        return Agent(config=self.agents_config["job_search_agent"])
+        return Agent(
+            config=self.agents_config["job_search_agent"],
+            tools = [web_search_tool],)
     @agent
     def job_matching_agent(self):
-        return Agent(config=self.agents_config["job_matching_agent"])
+        return Agent(config=self.agents_config["job_matching_agent"],
+        knowledge_source=[resume_knowledge])
     @agent
     def resume_optimization_agent(self):
-        return Agent(config=self.agents_config["resume_optimization_agent"])
+        return Agent(config=self.agents_config["resume_optimization_agent"],
+        knowledge_source=[resume_knowledge])
     @agent
     def company_research_agent(self):
-        return Agent(config=self.agents_config["company_research_agent"])
+        return Agent(config=self.agents_config["company_research_agent"],
+        knowledge_source=[resume_knowledge],
+        tools=[web_search_tool])
     @agent
     def interview_prep_agent(self):
-        return Agent(config=self.agents_config["interview_prep_agent"])
+        return Agent(config=self.agents_config["interview_prep_agent"],
+        knowledge_source=[resume_knowledge])
 
     @task
     def job_extraction_task(self):
@@ -67,4 +80,4 @@ class JobHunterCrew:
             verbose=True
         )
 
-JobHunterCrew().crew().kickoff()
+JobHunterCrew().crew().kickoff(inputs={'level':'Senior', 'position':'Golang Developer', 'location':'Netherlands'})
