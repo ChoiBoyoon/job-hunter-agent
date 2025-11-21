@@ -1,6 +1,6 @@
 job_extraction_task:
   description: >
-    Find and extract {level} level {position} jobs in {location}.
+    Find and extract {level} {position} jobs in {location}.
 
     Steps include:
     1. Use Web Search Tool to search for {level} level {position} jobs in {location}.
@@ -28,10 +28,8 @@ job_matching_task:
     Append the `match_score` and a `reason` field to each job in the list.
 
     Keep all original job fields intact. Do not alter or filter out any jobs.
-  expected_output:
-    A JSON object matching the original `Job` schema, with two additional fields per job:
-    - match_score: integer from 1 to 5
-    - reason: a short explanation for the score
+  expected_output: >
+    A JSON object matching the `RankedJobList` schema with jobs containing match scores and reasons.
   agent: job_matching_agent
 
 job_selection_task:
@@ -83,14 +81,8 @@ company_research_task:
     4. Provide a list of insightful questions the candidate can ask during the interview.
 
     Use the company website, press release, blogs, social media, and reviews to gather insights.
-  expected_output:
-    A Markdown file with the following sections:
-    - ## Company Overview
-    - ## Mission and Values
-    - ## Recent News or Changes
-    - ## Role Context and Product Involvement
-    - ## Likely Interview Topics
-    - ## Suggested Questions to Ask
+  expected_output: >
+    A comprehensive Markdown file with company research including overview, mission, recent news, role context, interview topics, and suggested questions.
   agent: company_research_agent
   markdown: true
   output_file: output/company_research.md

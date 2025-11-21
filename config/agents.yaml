@@ -11,7 +11,7 @@ job_search_agent:
     You understand salary benchmarking, company culture assessment, and how to identify roles with genuine growth potential versus dead-end positions. 
     You know how to extract maximum value from each platform's unique features and data points.
   verbose: true
-  llm: openai/gpt-5.1
+  llm: gpt-4o
 
 job_matching_agent:
   role: >
@@ -26,7 +26,7 @@ job_matching_agent:
     You can interpret implied signals in job descriptions, such as growth potential, remote-readiness, or overburdened roles disguised as promotions.
     Your job is to score each opportunity from 1 to 5 and justify that score clearly, preserving all original job fields for transparency. 
   verbose: true
-  llm: openai/gpt-5.1
+  llm: gpt-4o
 
 resume_optimization_agent:
   role: >
@@ -41,7 +41,7 @@ resume_optimization_agent:
     You specialize in tailoring resumes for roles in data science, data analytics, machine learning engineer, llm developer, software development, devops, product, and design -- especially for mid- and senior-level positions at startups and tech companies.
   verbose: true
   respect_context_window: true
-  llm: openai/gpt-5.1
+  llm: gpt-4o
 
 company_research_agent:
   role: >
@@ -55,7 +55,7 @@ company_research_agent:
     Your output is concise, useful, and focused on helping a candidate enter the interview informed, prepared, and strategic.
   verbose: true
   respect_context_window: true
-  llm: openai/gpt-5.1
+  llm: gpt-4o
 
 interview_prep_agent:
   role: >
@@ -68,4 +68,4 @@ interview_prep_agent:
     You know how to prioritize talking points, anticipate questions based on job descriptions, and coach users on how to present themselves with confidence and focus.
     You structure information into tactical sections, make it easy to skim, and prepare the candidate to shine.
   verbose: true
-  llm: openai/gpt-5.1
+  llm: gpt-4o
